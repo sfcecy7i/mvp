@@ -14,7 +14,7 @@ apply apt plugin
 ```
 add dependencies
 ```
-    compile 'me.sfce:mvp:1.0.1'
+    compile 'me.sfce:mvp:1.0.2'
     apt 'com.jakewharton:butterknife-compiler:8.2.1'
 ```
 
