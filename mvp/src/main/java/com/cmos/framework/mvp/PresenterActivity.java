@@ -14,8 +14,8 @@ public abstract class PresenterActivity<T extends V> extends AppCompatActivity i
         v = onCreateView(this, null);
         setContentView(v.view());
         v.setPresenter(this);
-        v.onBind();
         onBindView();
+        v.onBind();
     }
 
     @Override

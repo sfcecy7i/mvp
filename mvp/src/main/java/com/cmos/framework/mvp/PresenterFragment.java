@@ -23,8 +23,8 @@ public abstract class PresenterFragment<T extends V> extends Fragment implements
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         v.setPresenter(this);
-        v.onBind();
         onBindView();
+        v.onBind();
     }
 
     @Override
