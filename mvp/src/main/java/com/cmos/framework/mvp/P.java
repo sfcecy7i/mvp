@@ -1,7 +1,7 @@
 package com.cmos.framework.mvp;
 
-import android.app.FragmentManager;
+public interface P<T extends V> {
+    void register();
 
-public interface P {
-    FragmentManager getFragmentManager();
+    void unregister();
 }

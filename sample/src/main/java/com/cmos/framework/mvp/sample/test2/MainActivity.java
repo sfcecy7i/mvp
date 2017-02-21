@@ -1,6 +1,5 @@
-package com.cmos.framework.mvp.sample;
+package com.cmos.framework.mvp.sample.test2;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,11 +10,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cmos.framework.mvp.Pr;
-import com.cmos.framework.mvp.Vu;
+import com.cmos.framework.mvp.sample.Contract;
+import com.cmos.framework.mvp.sample.R;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements Contract.View {
+    Contract.Presenter mPresenter;
+    @BindView(R.id.test)
+    TextView mTest;
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -28,12 +33,25 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        MainPresenter.create(new MainView(this, findViewById(R.id.activity_main)));
+        ButterKnife.bind(this);
+        MainPresenter.create(this);
+        mTest.setText("Hello, mvp");
+        mTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mPresenter.hello();
+            }
+        });
     }
 
-    private void aaa() {
-        startActivity(new Intent());
-        startService(new Intent());
+    @Override
+    public String getTestText() {
+        return mTest.getText().toString();
+    }
+
+    @Override
+    public void bindPresenter(Contract.Presenter presenter) {
+        mPresenter = presenter;
     }
 }
 
@@ -49,26 +67,5 @@ class MainPresenter extends Pr<Contract.View> implements Contract.Presenter {
     @Override
     public void hello() {
         Log.e("MainPresenter", mView.getTestText());
-    }
-}
-
-class MainView extends Vu<Contract.Presenter> implements Contract.View {
-    @BindView(R.id.test)
-    TextView mTest;
-
-    protected MainView(Activity context, View rootView) {
-        super(context, rootView);
-        mTest.setText("Hello, mvp");
-        mTest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mPresenter.hello();
-            }
-        });
-    }
-
-    @Override
-    public String getTestText() {
-        return mTest.getText().toString();
     }
 }

@@ -1,35 +1,24 @@
 package com.cmos.framework.mvp;
 
 
-import android.content.Context;
-import android.support.annotation.LayoutRes;
-import android.view.LayoutInflater;
+import android.app.Activity;
 import android.view.View;
-import android.view.ViewGroup;
 
 import butterknife.ButterKnife;
 
 public abstract class Vu<T extends P> implements V<T> {
-    protected T p;
-    private View mView;
-    protected Context mContext;
+    protected View mRootView;
+    protected Activity mContext;
+    protected T mPresenter;
 
-    protected Vu(Context context, ViewGroup parent) {
+    protected Vu(Activity context, View rootView) {
         this.mContext = context;
-        mView = LayoutInflater.from(context).inflate(xml(), parent, false);
-        ButterKnife.bind(this, mView);
-    }
-
-    @LayoutRes
-    protected abstract int xml();
-
-    @Override
-    public void setPresenter(T presenter) {
-        this.p = presenter;
+        this.mRootView = rootView;
+        ButterKnife.bind(this, rootView);
     }
 
     @Override
-    public View view() {
-        return mView;
+    public void bindPresenter(T presenter) {
+        this.mPresenter = presenter;
     }
 }

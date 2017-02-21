@@ -1,5 +1,5 @@
 # mvp
-This is An Android MVP implement which makes Activities and Fragments as Presenters. <br/>
+This is An Android MVP Sample. <br/>
 
 ### Usage
 apply apt plugin
@@ -14,7 +14,7 @@ apply apt plugin
 ```
 add dependencies
 ```
-    compile 'me.sfce:mvp:1.0.2'
+    compile 'me.sfce:mvp:1.0.3'
     apt 'com.jakewharton:butterknife-compiler:8.2.1'
 ```
 
