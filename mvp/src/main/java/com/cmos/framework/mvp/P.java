@@ -4,4 +4,6 @@ public interface P<T extends V> {
     void register();
 
     void unregister();
+
+    void start();
 }

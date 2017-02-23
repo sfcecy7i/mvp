@@ -5,7 +5,7 @@ import com.cmos.framework.mvp.P;
 import com.cmos.framework.mvp.V;
 
 public interface Contract {
-    interface Presenter extends P<View> {
+    interface Presenter extends P {
         void hello();
     }
 

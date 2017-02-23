@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements Contract.View {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        MainPresenter.create(this);
+        MainPresenter.create(this).start();
         mTest.setText("Hello, mvp");
         mTest.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,8 +61,8 @@ public class MainActivity extends AppCompatActivity implements Contract.View {
 }
 
 class MainPresenter extends Pr<Contract.View> implements Contract.Presenter {
-    public static void create(Contract.View view) {
-        new MainPresenter(view);
+    public static Contract.Presenter create(Contract.View view) {
+        return new MainPresenter(view);
     }
 
     public MainPresenter(Contract.View view) {

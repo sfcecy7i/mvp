@@ -1,7 +1,7 @@
 package com.cmos.framework.mvp;
 
 
-public abstract class Pr<T extends V> implements P<T> {
+public abstract class Pr<T extends V> implements P {
     protected T mView;
 
     public Pr(T view) {
@@ -15,5 +15,10 @@ public abstract class Pr<T extends V> implements P<T> {
 
     @Override
     public void unregister() {
+    }
+
+    @Override
+    public void start() {
+        mView.onBind();
     }
 }

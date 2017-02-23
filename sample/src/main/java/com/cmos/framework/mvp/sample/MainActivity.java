@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        MainPresenter.create(new MainView(this, findViewById(R.id.activity_main)));
+        MainPresenter.create(new MainView(this, findViewById(R.id.activity_main))).start();
     }
 
     private void aaa() {
@@ -38,8 +38,8 @@ public class MainActivity extends AppCompatActivity {
 }
 
 class MainPresenter extends Pr<Contract.View> implements Contract.Presenter {
-    public static void create(Contract.View view) {
-        new MainPresenter(view);
+    public static Contract.Presenter create(Contract.View view) {
+        return new MainPresenter(view);
     }
 
     public MainPresenter(Contract.View view) {

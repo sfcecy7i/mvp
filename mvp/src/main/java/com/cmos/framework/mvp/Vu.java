@@ -20,7 +20,6 @@ public abstract class Vu<T extends P> implements V<T> {
     @Override
     public void bindPresenter(T presenter) {
         this.mPresenter = presenter;
-        onBind();
     }
 
     @Override
