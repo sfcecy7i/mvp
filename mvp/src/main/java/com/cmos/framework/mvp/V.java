@@ -5,4 +5,6 @@ public interface V<T extends P> {
     void bindPresenter(T presenter);
 
     void onBind();
+
+    void onUnbind();
 }

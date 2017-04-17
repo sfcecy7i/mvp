@@ -1,7 +1,7 @@
 package com.cmos.framework.mvp;
 
 
-public abstract class Pr<T extends V> implements P {
+public abstract class Pr<T extends V> implements P<T> {
     protected T mView;
 
     public Pr(T view) {
