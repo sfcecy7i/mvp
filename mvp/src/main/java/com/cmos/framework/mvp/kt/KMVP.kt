@@ -2,7 +2,7 @@ package com.cmos.framework.mvp.kt
 
 import android.app.Activity
 
-inline fun <reified V : KView<P, V>, reified P : KPresenter<P, V>> V.bindV(presenter: P) {
+inline fun <reified V : KView<P, V>, reified P : KPresenter<P, V>> V.bindP(presenter: P) {
     this.presenter = presenter
     presenter.ui = this
     this.init()
