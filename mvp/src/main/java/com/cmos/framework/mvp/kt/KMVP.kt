@@ -1,5 +1,7 @@
 package com.cmos.framework.mvp.kt
 
+import android.app.Activity
+
 inline fun <reified V : KView<P, V>, reified P : KPresenter<P, V>> V.bind(presenter: P) {
     this.presenter = presenter
     presenter.ui = this
@@ -37,7 +39,7 @@ interface KView<P : KPresenter<P, V>, V : KView<P, V>> {
 
     fun init() {}
 
-    fun destroy()
+    fun destroy() {}
 }
 
 interface KPresenter<P : KPresenter<P, V>, V : KView<P, V>> {
@@ -46,4 +48,13 @@ interface KPresenter<P : KPresenter<P, V>, V : KView<P, V>> {
     fun init() {}
 
     fun destroy() {}
+}
+
+abstract class KBaseView<P : KPresenter<P, V>, V : KView<P, V>, out A : Activity>(val activity: A) : KView<P, V> {
+    override var presenter: P? = null
+
+}
+
+abstract class KBasePresenter<P : KPresenter<P, V>, V : KView<P, V>> : KPresenter<P, V> {
+    override var ui: V? = null
 }
