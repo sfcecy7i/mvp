@@ -50,7 +50,7 @@ interface KPresenter<P : KPresenter<P, V>, V : KView<P, V>> {
     fun destroy() {}
 }
 
-abstract class KBaseView<P : KPresenter<P, V>, V : KView<P, V>, out A : Activity>(val activity: A) : KView<P, V> {
+abstract class KBaseView<P : KPresenter<P, V>, V : KView<P, V>, out A : Activity>(activity: A) : KView<P, V> {
     override var presenter: P? = null
 
 }
