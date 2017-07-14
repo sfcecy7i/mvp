@@ -58,6 +58,11 @@ public class MainActivity extends AppCompatActivity implements Contract.View {
     public void onBind() {
 
     }
+
+    @Override
+    public void onUnbind() {
+
+    }
 }
 
 class MainPresenter extends Pr<Contract.View> implements Contract.Presenter {
