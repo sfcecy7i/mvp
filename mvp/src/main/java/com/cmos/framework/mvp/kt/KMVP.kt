@@ -2,21 +2,21 @@ package com.cmos.framework.mvp.kt
 
 import android.app.Activity
 
-inline fun <reified A : Activity, reified V : KBaseView<P, A>, reified P : KBasePresenter<V>> V.bind(presenter: P) {
+inline fun <reified A : Activity, reified V : KView<P, A>, reified P : KPresenter<P, V>> V.bind(presenter: P) {
     this.presenter = presenter
     presenter.ui = this
     this.init()
     this.presenter!!.init()
 }
 
-inline fun <reified A : Activity, reified V : KBaseView<P, A>, reified P : KBasePresenter<V>> P.bind(ui: V) {
+inline fun <reified A : Activity, reified V : KView<P, A>, reified P : KPresenter<P, V>> P.bind(ui: V) {
     this.ui = ui
     ui.presenter = this
     this.init()
     this.ui!!.init()
 }
 
-inline fun <reified A : Activity, reified V : KBaseView<P, A>, reified P : KBasePresenter<V>> V.unbind() {
+inline fun <reified A : Activity, reified V : KView<P, A>, reified P : KPresenter<P, V>> V.unbind() {
     this.presenter?.let {
         it.destroy()
         it.ui = null
@@ -25,7 +25,7 @@ inline fun <reified A : Activity, reified V : KBaseView<P, A>, reified P : KBase
     this.destroy()
 }
 
-inline fun <reified A : Activity, reified V : KBaseView<P, A>, reified P : KBasePresenter<V>> P.unbind() {
+inline fun <reified A : Activity, reified V : KView<P, A>, reified P : KPresenter<P, V>> P.unbind() {
     this.ui?.let {
         it.destroy()
         it.presenter = null
@@ -34,30 +34,18 @@ inline fun <reified A : Activity, reified V : KBaseView<P, A>, reified P : KBase
     this.destroy()
 }
 
-interface KView {
-    fun init()
+interface KView<P : KPresenter<P, V>, V : KView<P, V>> {
+    var presenter: P?
+
+    fun init() {}
 
     fun destroy()
 }
 
-interface KPresenter {
-    fun init()
+interface KPresenter<P : KPresenter<P, V>, V : KView<P, V>> {
+    var ui: V?
 
-    fun destroy()
-}
+    fun init() {}
 
-abstract class KBasePresenter<V : KView> : KPresenter {
-    var ui: V? = null
-
-    override fun init() {}
-
-    override fun destroy() {}
-}
-
-abstract class KBaseView<P : KPresenter, in A : Activity>(activity: A) : KView {
-    var presenter: P? = null
-
-    override fun init() {}
-
-    override fun destroy() {}
+    fun destroy() {}
 }
